@@ -1,0 +1,90 @@
+---
+title: "An Explorotory Analysis of XXX"
+author: "names of team members"
+date: "March 4, 2018"
+output: word_document
+---
+
+
+## Introduction
+
+Write a brief introduction to the dataset: what it is about, how it was collected, and where you downloaded it. For example:
+
+The following analysis uses data collected by ...  It contains... This data was downloaded from ... 
+
+
+Write about the general purpose of this analysis, and list the questions you intend to address. For example:
+
+This analysis is designed to show .... More specifically, the data analysis will answer the following questions:
+
+1.  XXX
+2.  XXX
+3.  XXX
+
+...
+
+
+## 1. Data Import and Cleaning
+
+Describe how you imported the data to tidyverse, what problems you found with the data, what steps you took to clean and tidy the data. Include R code.
+
+Give a summary report of the clean dataset: how many rows and columns, variables and their data types, the first few rows of the tipple.
+
+## 2. Data Analysis 
+
+May describe data tranformation you carried out before any of your analysis, and include R code.
+
+
+### Question 1: 
+
+Describe data transformation specific for this question, and include R code;
+
+Describe how you address this specific question, and include R code;
+
+Write your answer to the quetsion based on the analysis; may look at and cite addional sources to increase your understanding about the question.
+
+
+**Note: If the question contains multiple parts (small questions), you may lable them as 1a, 1b,etc. as follows:**
+
+
+#### 1a: XXX
+
+Describe data transformation specific for this question, and include R code;
+
+Describe how you address this specific question, and include R code;
+
+Write your answer to the quetsion based on the analysis; may look at and cite addional sources to increase your understanding about the question.
+
+
+#### 1b: XXX
+
+...
+
+
+### Question 2: 
+
+
+
+
+### Question 3: 
+
+
+...
+
+
+
+## 3. Summary
+
+Reflect on the exploratory analysis: 
+
+(i)	summarize key facts learned from this analysis and discuss what you find most interesting;
+(ii) may briefly discuss limitations of the analysis;
+(iii)	may briefly discuss what additional data and analysis could be useful;
+(iv) may discuss any other thought you have.
+
+
+## References
+
+List sources or articles you cited, if there are any.
+
+
