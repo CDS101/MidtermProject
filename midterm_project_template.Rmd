@@ -24,6 +24,7 @@ This analysis is designed to show .... More specifically, the data analysis will
 ...
 
 
+
 ## 1. Data Import and Cleaning
 
 Describe how you imported the data to tidyverse, what problems you found with the data, what steps you took to clean and tidy the data. Include R code.
@@ -49,6 +50,17 @@ Write your answer to the quetsion based on the analysis; may look at and cite ad
 
 #### 1a: XXX
 
+```{r}
+library(tidyverse)
+
+impacts <- read.csv("impacts.csv")
+orbits <- read.csv("orbits.csv")
+
+impacts
+orbits
+
+```
+
 Describe data transformation specific for this question, and include R code;
 
 Describe how you address this specific question, and include R code;
@@ -58,7 +70,49 @@ Write your answer to the quetsion based on the analysis; may look at and cite ad
 
 #### 1b: XXX
 
-...
+... 
+```{r}
+
+impacts <- rename(
+  impacts,
+  
+  name = Object.Name,
+  start = Period.Start,
+  end = Period.End,
+  impact = Possible.Impacts,
+  cum_impact = Cumulative.Impact.Probability,
+  velocity = Asteroid.Velocity,
+  magnitude = Asteroid.Magnitude,
+  diameter = Asteroid.Diameter..km.,
+  cum_pal = Cumulative.Palermo.Scale,
+  max_pal = Maximum.Palermo.Scale,
+  max_tor = Maximum.Torino.Scale
+  )
+
+```
+
+```{r}
+
+orbits <- orbits%>%
+  rename(
+    name = Object.Name,
+    class = Object.Classification,
+    epoch = Epoch..TDB.,
+    axis = Orbit.Axis..AU.,
+    eccen = Orbit.Eccentricity,
+    inc = Orbit.Inclination..deg.,
+    ph_arg = Perihelion.Argument..deg.,
+    long = Node.Longitude..deg.,
+    mean = Mean.Anomoly..deg.,
+    ph_dist = Perihelion.Distance..AU.,
+    ah_dist = Aphelion.Distance..AU.,
+    dist = Orbital.Period..yr.,
+    min_int_dist = Minimum.Orbit.Intersection.Distance..AU.,
+    ref = Orbital.Reference,
+    mag = Asteroid.Magnitude
+  )
+
+```
 
 
 ### Question 2: 
