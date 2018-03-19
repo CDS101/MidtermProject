@@ -29,26 +29,8 @@ This analysis is designed to show .... More specifically, the data analysis will
 
 Describe how you imported the data to tidyverse, what problems you found with the data, what steps you took to clean and tidy the data. Include R code.
 
-Give a summary report of the clean dataset: how many rows and columns, variables and their data types, the first few rows of the tipple.
-
-## 2. Data Analysis 
-
-May describe data tranformation you carried out before any of your analysis, and include R code.
-
-
-### Question 1: 
-
-Describe data transformation specific for this question, and include R code;
-
-Describe how you address this specific question, and include R code;
-
-Write your answer to the quetsion based on the analysis; may look at and cite addional sources to increase your understanding about the question.
-
-
-**Note: If the question contains multiple parts (small questions), you may lable them as 1a, 1b,etc. as follows:**
-
-
-#### 1a: XXX
+#### Data Importing
+Data was imported using the built in csv reading function.
 
 ```{r}
 library(tidyverse)
@@ -61,16 +43,8 @@ orbits
 
 ```
 
-Describe data transformation specific for this question, and include R code;
+One of the first steps we took to make working with the data easier was to change the column names to be shorter and easier to type.
 
-Describe how you address this specific question, and include R code;
-
-Write your answer to the quetsion based on the analysis; may look at and cite addional sources to increase your understanding about the question.
-
-
-#### 1b: XXX
-
-... 
 ```{r}
 
 impacts <- rename(
@@ -112,7 +86,56 @@ orbits <- orbits%>%
     mag = Asteroid.Magnitude
   )
 
+impacts
+orbits
 ```
+
+The two data sets had slightly varying names. The name column for the orbit data set sometimes contained a insignificant number, with the true name in parenthesis. To clean this, we split the data set into two sets, for whether or not it has this useless number in the name.
+
+The name also contains the year of observation in it. We split this into a seperate column using separate, and then merge orbits and impacts into one asteroids dataset, and drop the null rows.
+
+```{r}
+orbits_no_num <- filter(orbits, !grepl("\\(", name)) %>% separate(name, c("year", "name"))
+orbits_no_num
+orbits_num <- filter(orbits, grepl("\\(", name)) %>% separate(name, c("number", "name"), "\\(") %>% mutate(name = gsub("\\)", "", name)) %>% select(name:mag) %>% separate(name, c("year", "name"))
+
+orbits_named <- rbind(orbits_no_num, orbits_num)
+orbits_named
+impacts_mod <- impacts %>% separate(name, c("year", "name"))
+
+asteroids <- full_join(impacts_mod, orbits_named)
+asteroids <- asteroids %>% drop_na()
+```
+
+## 2. Data Analysis 
+
+May describe data tranformation you carried out before any of your analysis, and include R code.
+
+
+### Question 1: 
+
+Describe data transformation specific for this question, and include R code;
+
+Describe how you address this specific question, and include R code;
+
+Write your answer to the quetsion based on the analysis; may look at and cite addional sources to increase your understanding about the question.
+
+
+**Note: If the question contains multiple parts (small questions), you may lable them as 1a, 1b,etc. as follows:**
+
+
+#### 1a: XXX
+
+Describe data transformation specific for this question, and include R code;
+
+Describe how you address this specific question, and include R code;
+
+Write your answer to the quetsion based on the analysis; may look at and cite addional sources to increase your understanding about the question.
+
+
+#### 1b: XXX
+
+
 
 
 ### Question 2: 
