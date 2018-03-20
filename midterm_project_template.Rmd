@@ -92,19 +92,20 @@ orbits
 
 The two data sets had slightly varying names. The name column for the orbit data set sometimes contained a insignificant number, with the true name in parenthesis. To clean this, we split the data set into two sets, for whether or not it has this useless number in the name.
 
-The name also contains the year of observation in it. We split this into a seperate column using separate, and then merge orbits and impacts into one asteroids dataset, and drop the null rows.
+The name also contains the year of observation in it. We split this into a seperate column using separate, and then merge orbits and impacts into one asteroids dataset, and drop the null rows. Another dataset, containing all asteroid objects, was created, We replaced the missing impact column with 0 for asteroids with no potential impact.
 
 ```{r}
 orbits_no_num <- filter(orbits, !grepl("\\(", name)) %>% separate(name, c("year", "name"))
-orbits_no_num
 orbits_num <- filter(orbits, grepl("\\(", name)) %>% separate(name, c("number", "name"), "\\(") %>% mutate(name = gsub("\\)", "", name)) %>% select(name:mag) %>% separate(name, c("year", "name"))
 
 orbits_named <- rbind(orbits_no_num, orbits_num)
-orbits_named
 impacts_mod <- impacts %>% separate(name, c("year", "name"))
 
-asteroids <- full_join(impacts_mod, orbits_named)
-asteroids <- asteroids %>% drop_na()
+asteroids_raw <- full_join(impacts_mod, orbits_named)
+asteroid_impacts <- asteroids_raw %>% drop_na()
+
+asteroids <- asteroids_raw %>% mutate(impact = ifelse(is.na(impact), 0, impact))
+asteroids
 ```
 
 ## 2. Data Analysis 
@@ -124,13 +125,18 @@ Write your answer to the quetsion based on the analysis; may look at and cite ad
 **Note: If the question contains multiple parts (small questions), you may lable them as 1a, 1b,etc. as follows:**
 
 
-#### 1a: XXX
+#### 1a: Number of dangerous asteroids, over time
 
 Describe data transformation specific for this question, and include R code;
 
 Describe how you address this specific question, and include R code;
 
 Write your answer to the quetsion based on the analysis; may look at and cite addional sources to increase your understanding about the question.
+
+
+
+```{r}
+```
 
 
 #### 1b: XXX
